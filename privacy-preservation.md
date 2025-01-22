@@ -30,7 +30,6 @@ BrowserID leverages cryptographic keypair technology to securely identify and tr
 ## User ID Handling
 
 - The user ID is provided by the user or your service at runtime.
-- It is never stored on BrowserID servers, further protecting user privacy.
 
 ## Compliance with Privacy Standards
 

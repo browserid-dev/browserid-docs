@@ -10,6 +10,6 @@ A significant cost benefit of BrowserID is reducing reliance on SMS one-time pas
 
 BrowserID supports compliance with Strong Customer Authentication (SCA) and Secure Payment Confirmation (SPC) standards. SCA is a requirement under PSD2 for enhancing payment security. Implementing SCA can have associated costs, such as potential customer drop-off due to added friction.
 
-Fraud prevention is another area where BrowserID can provide cost benefits. The total cost of fraud for merchants is estimated at $3.60 for every $1 of fraud. Additionally, the global cost of fraud is estimated at $5.13 trillion annually.
+Fraud prevention is another area where BrowserID can provide cost benefits.
 
 By reducing the need for SMS OTPs and enhancing security, BrowserID can potentially help companies save on authentication costs and mitigate fraud risks. However, specific cost savings would depend on individual company circumstances and implementation details.

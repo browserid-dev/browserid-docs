@@ -3,8 +3,8 @@
 layout: home
 
 hero:
-  name: "Seamless, secure logins"
-  text: "with zero compromise on privacy"
+  name: "One-click trust"
+  text: "Secure, silent authentication"
   tagline: Privacy-friendly authentication that doesn't rely on cookies or fingerprinting, enhancing user privacy and security in line with modern web standards.
   image:
     light: /trust-device-light.png

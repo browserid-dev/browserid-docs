@@ -17,7 +17,7 @@ export default defineConfig({
       { text: "Industry use cases", link: "/industry-use-cases" },
       {
         text: "Getting started",
-        link: "/getting-started/enhanced-auth",
+        link: "/getting-started/add-browser-id-to-your-web-app",
       },
       { text: "Pricing", link: "/pricing" },
       { text: "Contact", link: "mailto:sales@browserid.dev" },
@@ -40,8 +40,8 @@ export default defineConfig({
         text: "Getting started",
         items: [
           {
-            text: "Enhance your authentication",
-            link: "/getting-started/enhanced-auth",
+            text: "Add BrowserID to web app",
+            link: "/getting-started/add-browser-id-to-your-web-app",
           },
         ],
       },
