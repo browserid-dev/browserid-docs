@@ -10,9 +10,9 @@ Registers a public key with BrowserID for later verification.
 == cURL
 
 ```curl
-curl -X POST "https://api.browserid.dev/projects/${BROWSERID_PROJECT_ID}/register" \
+curl -X POST "https://api.browserid.dev/v1/workspaces/${WORKSPACE_ID}/register" \
 -H "Content-Type: application/json" \
--H "Authorization: Bearer ${ZERONNESS_API_KEY}" \
+-H "Authorization: Bearer ${API_KEY}" \
 -d '{"userId": "123", "publicKey": "yourPublicKeyHere"}'
 ```
 
@@ -31,12 +31,12 @@ async function handleRequest(request) {
   const { userId, publicKey } = await request.json();
 
   const response = await fetch(
-    `https://api.browserid.dev/projects/${BROWSERID_PROJECT_ID}/register`,
+    `https://api.browserid.dev/v1/workspaces/${WORKSPACE_ID}/register`,
     {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${ZERONNESS_API_KEY}`,
+        Authorization: `Bearer ${API_KEY}`,
       },
       body: JSON.stringify({ userId, publicKey }),
     }
@@ -63,7 +63,7 @@ app.post("/register", async (req, res) => {
 
   try {
     const response = await axios.post(
-      `https://api.browserid.dev/projects/${process.env.BROWSERID_PROJECT_ID}/register`,
+      `https://api.browserid.dev/v1/workspaces/${process.env.WORKSPACE_ID}/register`,
       {
         userId,
         publicKey,
@@ -71,7 +71,7 @@ app.post("/register", async (req, res) => {
       {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.BROWSERID_API_KEY}`,
+          Authorization: `Bearer ${process.env.API_KEY}`,
         },
       }
     );

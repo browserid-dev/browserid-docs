@@ -54,10 +54,9 @@ export default defineConfig({
       {
         text: "Web SDK Reference",
         items: [
-          { text: "Install", link: "/web-sdk/install" },
-          { text: "Generate keys", link: "/web-sdk/generate-keys" },
-          { text: "Create challenge", link: "/web-sdk/create-challenge" },
-          { text: "Unlink browser", link: "/web-sdk/unlink-browser" },
+          { text: "Generate keys", link: "/sdk/generate-keys" },
+          { text: "Create challenge", link: "/sdk/create-challenge" },
+          { text: "Unlink browser", link: "/sdk/unlink-browser" },
         ],
       },
       {
@@ -73,6 +72,10 @@ export default defineConfig({
           {
             text: "Scalability",
             link: "/scalability-and-security/scalability",
+          },
+          {
+            text: "Key rotation",
+            link: "/scalability-and-security/key-rotation",
           },
           {
             text: "Rate limiting",

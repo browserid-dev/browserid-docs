@@ -154,7 +154,7 @@ const registerBrowser = async (
 
 ## Let's verify the browser
 
-To verify that a browser is trusted, you need to create a challenge and verify it with BrowserID.
+To verify that a browser is trusted, you need to create a _challenge_ and verify it with BrowserID.
 
 ### Create an API to verify with BrowserID
 
@@ -241,8 +241,8 @@ Within your API from the [Create an API to verify with BrowserID](#create-an-api
 == Node
 
 ```typescript
-if (response.status === "untrusted") {
-  // block the user
+if (response.status === false) {
+  // block the deviceID/userID on your existing authentication flow
 }
 ```
 

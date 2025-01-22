@@ -10,9 +10,9 @@ Verifies a challenge signature with Zeroness.
 == cURL
 
 ```curl
-curl -X POST "https://api.browserid.dev/projects/${BROWSERID_PROJECT_ID}/verify" \
+curl -X POST "https://api.browserid.dev/v1/workspaces/${WORKSPACE_ID}/verify" \
 -H "Content-Type: application/json" \
--H "Authorization: Bearer ${BROWSERID_API_KEY}" \
+-H "Authorization: Bearer ${API_KEY}" \
 -d '{"challenge": "yourChallengeHere", "signature": "yourSignatureHere", "userId": "yourUserIdHere"}'
 ```
 
@@ -31,12 +31,12 @@ async function handleRequest(request) {
   const { challenge, signature, userId } = await request.json();
 
   const response = await fetch(
-    `https://api.browserid.dev/projects/${BROWSERID_PROJECT_ID}/verify`,
+    `https://api.browserid.dev/v1/workspaces/${WORKSPACE_ID}/verify`,
     {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${BROWSERID_API_KEY}`,
+        Authorization: `Bearer ${API_KEY}`,
       },
       body: JSON.stringify({ challenge, signature, userId }),
     }
@@ -63,7 +63,7 @@ app.post("/verify", async (req, res) => {
 
   try {
     const response = await axios.post(
-      `https://api.browserid.dev/projects/${process.env.BROWSERID_PROJECT_ID}/verify`,
+      `https://api.browserid.dev/v1/workspaces/${process.env.WORKSPACE_ID}/verify`,
       {
         challenge,
         signature,
@@ -72,7 +72,7 @@ app.post("/verify", async (req, res) => {
       {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.BROWSERID_API_KEY}`,
+          Authorization: `Bearer ${process.env.API_KEY}`,
         },
       }
     );
