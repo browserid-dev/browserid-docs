@@ -2,9 +2,9 @@
 outline: deep
 ---
 
-# Add BrowserID to your web app
+# Set up BrowserID
 
-This guide will instruct you through setting up BrowserID in your application to verify that a user's browser is trusted.
+This guide will instruct you through setting up BrowserID in your application and verify that browsers are trusted.
 
 ## Prerequisites
 
@@ -13,9 +13,9 @@ This guide will instruct you through setting up BrowserID in your application to
 
 ## Create a new Workspace
 
-Navigate to the [BrowserID dashboard](https://dash.browserid.dev) and click on the "Create Workspace" button.
+Navigate to the [BrowserID dashboard](https://dash.browserid.dev) and click on the "Create Workspace" button if you don't have one already.
 
-Head over to the "API Keys" tab to get your `projectId` and `apiKey`.
+Head over to the "API Keys" tab on the workspace and grab your `projectId` and `apiKey`.
 
 ## Install the SDK
 
@@ -54,13 +54,15 @@ If your backend is seperately written in TypeScript, you can also go ahead and i
 
 ## Let's generate a trust token
 
-Once your user has authenticated with your existing authentication flow client-side and you have verified their identity, you can generate a trust token within your web application.
+Once your user has authenticated with your existing authentication flow client-side and you have verified their identity (e.g. username, password + 2FA, etc.), generate a trust token within your web application.
 
 :::tabs
 == Client-side (Browser)
 
 ```typescript
 import { frontend } from "@browserid/sdk";
+
+// ... existing authentication flow ...
 
 // userId is retrieved from your existing authentication flow
 const { deviceId, publicKey, userId } = await frontend.generateKeys({
@@ -70,14 +72,20 @@ const { deviceId, publicKey, userId } = await frontend.generateKeys({
 
 :::
 
+<sub>Learn more about the `generateKeys` function [here](/web-sdk/generate-keys).</sub>
+
 ## Registering the browser
+
+In order to register the browser in a secure way, you need to create an API that will handle the registration of the browser. Once you have your API ready, you can create a _challenge_ via the SDK and verify the browser from client-side.
+
+### Create an API to register the browser with BrowserID
 
 Grab your `projectId` and `apiKey` from the [BrowserID dashboard](https://dash.browserid.dev) and use them to initiate a new instance of the `Backend` class.
 
 ::: warning
 It's highly recommended to register the `publicKey` with your backend/server-side API so that you do not expose your api key on the client-side.
 
-Not doing so will expose your api key to the client-side and allow anyone to register a browser for your project.
+Not doing so will expose your api key to the client-side and allow anyone to register a browser for your workspace.
 :::
 
 :::tabs
@@ -87,8 +95,8 @@ Not doing so will expose your api key to the client-side and allow anyone to reg
 import { Backend } from "@browserid/sdk";
 
 const backend = new Backend({
-  projectId: "YOUR_PROJECT_ID",
-  apiKey: "YOUR_API_KEY",
+  workspaceId: "WORKSPACE_ID",
+  apiKey: "API_KEY",
 });
 
 app.post("/register", async (req, res) => {
@@ -156,9 +164,10 @@ Create a backend/server-side API that will handle the verification of the browse
 == Node
 
 ```typescript
+// Reuse the same instance of the Backend class from the "Register the browser" step or create a new one
 const backend = new Backend({
-  projectId: "YOUR_PROJECT_ID",
-  apiKey: "YOUR_API_KEY",
+  workspaceId: "WORKSPACE_ID",
+  apiKey: "API_KEY",
 });
 
 app.post("/verify", async (req, res) => {
@@ -167,6 +176,8 @@ app.post("/verify", async (req, res) => {
     const response = await backend.verify({
       challenge,
       signature,
+      // the userId can be retrieved from your existing authentication flow or from @browserid/sdk
+      // You can also compare the userId with the userId from your existing authentication flow for additional security
       userId,
       deviceId,
     });
@@ -196,10 +207,11 @@ With your API from the previous step, you can now create a challenge and verify 
 == Client-side (Browser)
 
 ```typescript
-import { createChallenge } from "@zeroness/web";
+import { frontend } from "@browserid/sdk";
 
 const verify = async () => {
-  const { challenge, signature, userId, deviceId } = await createChallenge();
+  const { challenge, signature, userId, deviceId } =
+    await frontend.createChallenge();
 
   const req = await fetch("/your-api-endpoint/verify", {
     method: "POST",
@@ -219,4 +231,23 @@ const verify = async () => {
 };
 ```
 
+:::
+
+## Blocking untrusted browsers
+
+Within your API from the [Create an API to verify with BrowserID](#create-an-api-to-verify-with-browserid) step, you can now block untrusted browsers with the status of the `verify` response. An example of how you can do this is below.
+
+:::tabs
+== Node
+
+```typescript
+if (response.status === "untrusted") {
+  // block the user
+}
+```
+
+:::
+
+::: tip
+You can also verify the `verify` response client-side to block untrusted browsers but this is not recommended.
 :::

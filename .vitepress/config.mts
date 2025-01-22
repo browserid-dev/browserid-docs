@@ -17,7 +17,7 @@ export default defineConfig({
       { text: "Industry use cases", link: "/industry-use-cases" },
       {
         text: "Getting started",
-        link: "/getting-started/add-browser-id-to-your-web-app",
+        link: "/getting-started/setup-browserid",
       },
       { text: "Pricing", link: "/pricing" },
       { text: "Contact", link: "mailto:sales@browserid.dev" },
@@ -40,8 +40,8 @@ export default defineConfig({
         text: "Getting started",
         items: [
           {
-            text: "Add BrowserID to web app",
-            link: "/getting-started/add-browser-id-to-your-web-app",
+            text: "Set up BrowserID",
+            link: "/getting-started/setup-browserid",
           },
         ],
       },
