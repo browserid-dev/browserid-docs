@@ -3,7 +3,7 @@ import { tabsMarkdownPlugin } from "vitepress-plugin-tabs";
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: "BrowserID",
+  title: "BrowserID Docs",
   description: "Passive, privacy-friendly browser authentication.",
   cleanUrls: true,
   head: [["link", { rel: "icon", href: "/favicon.ico" }]],
@@ -13,7 +13,7 @@ export default defineConfig({
     },
     // https://vitepress.dev/reference/default-theme-config
     nav: [
-      { text: "Overview", link: "/overview" },
+      { text: "Overview", link: "/" },
       { text: "Industry use cases", link: "/industry-use-cases" },
       {
         text: "Getting started",
@@ -26,7 +26,7 @@ export default defineConfig({
       {
         text: "Introduction",
         items: [
-          { text: "Overview", link: "/overview" },
+          { text: "Overview", link: "/" },
           { text: "Industry use cases", link: "/industry-use-cases" },
           { text: "Reducing costs", link: "/reducing-costs" },
           { text: "Privacy preservation", link: "/privacy-preservation" },
