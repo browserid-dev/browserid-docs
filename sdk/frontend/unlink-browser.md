@@ -10,20 +10,22 @@ Removes all authentication data from the browser's secure storage, effectively l
 
 :::tabs
 == Client-side (Browser)
+
 ```typescript
 try {
-    await unlinkBrowser();
-    console.log("Browser successfully unlinked");
+  await frontend.unlinkBrowser();
+  console.log("Browser successfully unlinked");
 } catch (error) {
-    console.error("Failed to unlink browser:", error);
+  console.error("Failed to unlink browser:", error);
 }
 ```
+
 :::
 
 ## Syntax
 
 ```typescript
-async function unlinkBrowser(): Promise<void>
+async function unlinkBrowser(): Promise<void>;
 ```
 
 ## Parameters
@@ -36,7 +38,8 @@ Returns a Promise that resolves when all authentication data has been successful
 
 ## Exceptions
 
-Throws an `Error` if:
+Throws a `GoodConditionsError` if:
+
 - The database transaction fails
 - Any removal operation fails
 - The database cannot be opened
@@ -49,13 +52,14 @@ This function performs the following steps:
 2. Creates a transaction to remove the following data:
    - Private key
    - User ID
+   - Device ID
    - Hostname
 3. Completes the transaction and confirms the removal
 
 This operation is typically used when:
+
 - Logging out a user
 - Removing device authentication
 - Clearing sensitive data from the browser
 
 Once completed, the browser will no longer have access to the authentication credentials, and the user will need to generate new keys to authenticate again.
-

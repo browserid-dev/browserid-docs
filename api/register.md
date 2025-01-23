@@ -13,7 +13,7 @@ Registers a public key with BrowserID for later verification.
 curl -X POST "https://api.browserid.dev/v1/workspaces/${WORKSPACE_ID}/register" \
 -H "Content-Type: application/json" \
 -H "Authorization: Bearer ${API_KEY}" \
--d '{"userId": "123", "publicKey": "yourPublicKeyHere"}'
+-d '{"userId": "123", "publicKey": "yourPublicKeyHere", "deviceId": "123"}'
 ```
 
 == Cloudflare Worker
@@ -28,7 +28,7 @@ async function handleRequest(request) {
     return new Response("Method Not Allowed", { status: 405 });
   }
 
-  const { userId, publicKey } = await request.json();
+  const { userId, publicKey, deviceId } = await request.json();
 
   const response = await fetch(
     `https://api.browserid.dev/v1/workspaces/${WORKSPACE_ID}/register`,
@@ -38,7 +38,7 @@ async function handleRequest(request) {
         "Content-Type": "application/json",
         Authorization: `Bearer ${API_KEY}`,
       },
-      body: JSON.stringify({ userId, publicKey }),
+      body: JSON.stringify({ userId, publicKey, deviceId }),
     }
   );
 
@@ -59,7 +59,7 @@ const app = express();
 app.use(express.json());
 
 app.post("/register", async (req, res) => {
-  const { userId, publicKey } = req.body;
+  const { userId, publicKey, deviceId } = req.body;
 
   try {
     const response = await axios.post(
@@ -67,6 +67,7 @@ app.post("/register", async (req, res) => {
       {
         userId,
         publicKey,
+        deviceId,
       },
       {
         headers: {

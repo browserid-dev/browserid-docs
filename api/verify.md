@@ -13,7 +13,7 @@ Verifies a challenge signature with Zeroness.
 curl -X POST "https://api.browserid.dev/v1/workspaces/${WORKSPACE_ID}/verify" \
 -H "Content-Type: application/json" \
 -H "Authorization: Bearer ${API_KEY}" \
--d '{"challenge": "yourChallengeHere", "signature": "yourSignatureHere", "userId": "yourUserIdHere"}'
+-d '{"challenge": "yourChallengeHere", "signature": "yourSignatureHere", "userId": "yourUserIdHere", "deviceId": "yourDeviceIdHere"}'
 ```
 
 == Cloudflare Worker
@@ -28,7 +28,7 @@ async function handleRequest(request) {
     return new Response("Method Not Allowed", { status: 405 });
   }
 
-  const { challenge, signature, userId } = await request.json();
+  const { challenge, signature, userId, deviceId } = await request.json();
 
   const response = await fetch(
     `https://api.browserid.dev/v1/workspaces/${WORKSPACE_ID}/verify`,
@@ -38,7 +38,7 @@ async function handleRequest(request) {
         "Content-Type": "application/json",
         Authorization: `Bearer ${API_KEY}`,
       },
-      body: JSON.stringify({ challenge, signature, userId }),
+      body: JSON.stringify({ challenge, signature, userId, deviceId }),
     }
   );
 
@@ -59,7 +59,7 @@ const app = express();
 app.use(express.json());
 
 app.post("/verify", async (req, res) => {
-  const { challenge, signature, userId } = req.body;
+  const { challenge, signature, userId, deviceId } = req.body;
 
   try {
     const response = await axios.post(
@@ -68,6 +68,7 @@ app.post("/verify", async (req, res) => {
         challenge,
         signature,
         userId,
+        deviceId,
       },
       {
         headers: {

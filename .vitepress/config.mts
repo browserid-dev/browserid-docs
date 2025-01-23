@@ -3,7 +3,7 @@ import { tabsMarkdownPlugin } from "vitepress-plugin-tabs";
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: "BrowserID Docs",
+  title: "BrowserID",
   description: "Passive, privacy-friendly browser authentication.",
   cleanUrls: true,
   head: [["link", { rel: "icon", href: "/favicon.ico" }]],
@@ -13,22 +13,22 @@ export default defineConfig({
     },
     // https://vitepress.dev/reference/default-theme-config
     nav: [
-      { text: "Overview", link: "/" },
-      { text: "Industry use cases", link: "/industry-use-cases" },
+      { text: "Overview", link: "/overview" },
+      { text: "Use cases", link: "/use-cases" },
       {
         text: "Getting started",
         link: "/getting-started/setup-browserid",
       },
       { text: "Pricing", link: "/pricing" },
+      { text: "Waitlist", link: "https://accounts.browserid.dev/waitlist" },
       { text: "Contact", link: "mailto:sales@browserid.dev" },
     ],
     sidebar: [
       {
         text: "Introduction",
         items: [
-          { text: "Overview", link: "/" },
-          { text: "Industry use cases", link: "/industry-use-cases" },
-          { text: "Reducing costs", link: "/reducing-costs" },
+          { text: "Overview", link: "/overview" },
+          { text: "Use cases", link: "/use-cases" },
           { text: "Privacy preservation", link: "/privacy-preservation" },
           {
             text: "Compliance with regulations",
@@ -54,9 +54,28 @@ export default defineConfig({
       {
         text: "Web SDK Reference",
         items: [
-          { text: "Generate keys", link: "/sdk/generate-keys" },
-          { text: "Create challenge", link: "/sdk/create-challenge" },
-          { text: "Unlink browser", link: "/sdk/unlink-browser" },
+          {
+            text: "Frontend",
+            items: [
+              {
+                text: "Create keypair",
+                link: "/sdk/frontend/create-keypair",
+              },
+              {
+                text: "Create challenge",
+                link: "/sdk/frontend/create-challenge",
+              },
+              { text: "Unlink browser", link: "/sdk/frontend/unlink-browser" },
+            ],
+          },
+          {
+            text: "Backend",
+            items: [
+              { text: "Backend Class", link: "/sdk/backend/backend-class" },
+              { text: "Register", link: "/sdk/backend/register" },
+              { text: "Verify", link: "/sdk/backend/verify" },
+            ],
+          },
         ],
       },
       {
@@ -81,7 +100,6 @@ export default defineConfig({
             text: "Rate limiting",
             link: "/scalability-and-security/rate-limiting",
           },
-          { text: "Storage", link: "/scalability-and-security/storage" },
           { text: "Longevity", link: "/scalability-and-security/longevity" },
         ],
       },
