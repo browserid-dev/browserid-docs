@@ -6,10 +6,10 @@ hero:
   name: "Silently trust"
   text: "browsers"
   tagline: Stop fraud, account takeovers, autonomous AIs agents and more.
-  image:
-    light: /trust-device-light.png
-    dark: /trust-device-dark.png
-    alt: BrowserID logo
+  # image:
+  #   light: /trust-device-light.png
+  #   dark: /trust-device-dark.png
+  #   alt: BrowserID logo
   actions:
     - theme: brand
       text: Overview
