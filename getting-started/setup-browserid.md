@@ -72,7 +72,7 @@ const { deviceId, publicKey, userId } = await frontend.generateKeys({
 
 :::
 
-<sub>Learn more about the `generateKeys` function [here](/web-sdk/generate-keys).</sub>
+<sub>Learn more about the `generateKeys` function [here](/sdk/frontend/create-keypair).</sub>
 
 ## Registering the browser
 
