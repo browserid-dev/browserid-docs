@@ -21,7 +21,7 @@ export default defineConfig({
       },
       { text: "Pricing", link: "/pricing" },
       { text: "Waitlist", link: "https://accounts.browserid.dev/waitlist" },
-      { text: "Contact", link: "mailto:sales@browserid.dev" },
+      // { text: "Contact", link: "mailto:sales@browserid.dev" },
     ],
     sidebar: [
       {
